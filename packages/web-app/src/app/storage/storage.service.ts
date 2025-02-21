@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { openDB } from 'idb';
-import { from, Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
+import { Injectable } from '@angular/core';
 import { Task } from '@take-home/shared';
+import { openDB } from 'idb';
 
 @Injectable({
   providedIn: 'root',
@@ -27,21 +27,24 @@ export class StorageService {
   }
 
   // Read
-  getTask(id: string | null): Promise<Task> {
+  async getTask(id: string | null): Promise<Task> {
     const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
     return dbPromise.then((db) => {
       return db.get(`${this.tasks}`, id ? id : '');
     });
   }
 
-  getTasks(): Promise<Task[]> {
+  async getTasks(): Promise<Task[]> {
     const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
     return dbPromise.then((db) => {
       return db.getAll(`${this.tasks}`);
     });
   }
-
-  getItem<T>(storeName: string, id: string | null): Observable<T> {
+  // reason to add promise, to make it async function and return observable
+  async getItem<T>(
+    storeName: string,
+    id: string | null,
+  ): Promise<Observable<T>> {
     const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
     return from(
       dbPromise.then((db) => {
@@ -50,7 +53,7 @@ export class StorageService {
     );
   }
 
-  getItems<T>(storeName: string): Promise<T[]> {
+  async getItems<T>(storeName: string): Promise<T[]> {
     const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
     return dbPromise.then((db) => {
       return db.getAll(storeName);
@@ -64,21 +67,21 @@ export class StorageService {
     });
   }
 
-  private addTask(item: Task) {
+  private async addTask(item: Task) {
     const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
     return dbPromise.then((db) => {
       return db.add(this.tasks, item, item.uuid);
     });
   }
 
-  private updateTask(item: Task) {
+  private async updateTask(item: Task) {
     const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
     return dbPromise.then((db) => {
       return db.put(this.tasks, item, item.uuid);
     });
   }
 
-  private clearTasks() {
+  private async clearTasks() {
     const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
     return dbPromise.then((db) => {
       return db.clear(`${this.tasks}`);
