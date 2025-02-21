@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { TasksService } from '../tasks.service';
-import { Task } from '@take-home/shared';
 import { MatChipSelectionChange } from '@angular/material/chips';
+import { Task } from '@take-home/shared';
+import { TasksService } from '../tasks.service';
 
 @Component({
     selector: 'take-home-filters-component',

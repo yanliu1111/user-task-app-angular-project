@@ -55,7 +55,9 @@ export class AddComponent {
         ...this.addTaskForm.getRawValue(),
         uuid: faker.string.uuid(),
         isArchived: false,
-        scheduledDate: new Date(),
+        // + 1 day
+        // scheduledDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString(),
+        scheduledDate: Date.now()
       };
 
       await this.storageService.addTaskItem(newTask);
