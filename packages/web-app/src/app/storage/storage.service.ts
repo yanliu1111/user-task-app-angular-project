@@ -40,7 +40,7 @@ export class StorageService {
       return db.getAll(`${this.tasks}`);
     });
   }
-  // reason to add promise, to make it async function and return observable
+  //debug add promise
   async getItem<T>(
     storeName: string,
     id: string | null,

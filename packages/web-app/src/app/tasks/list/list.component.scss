@@ -16,11 +16,30 @@
 
     mat-card {
       padding: var(--layout-padding);
+      height: 200px; // Set a fixed height for each card
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       &.complete {
         background-color: var(--success-color);
       }
       .high-priority {
         color: var(--error-color);
+      }
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--layout-gap-size);
+
+        .card-actions {
+          display: flex;
+          gap: var(--layout-gap-size);
+        }
+      }
+
+      mat-card-content {
+        overflow-y: auto;
       }
     }
   }
