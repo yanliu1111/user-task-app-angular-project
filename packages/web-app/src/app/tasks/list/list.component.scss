@@ -1,3 +1,8 @@
+$primary-color: #3f51b5; 
+$warn-color: #f44336; 
+
+$primary-color-dark: darken($primary-color, 10%);
+$warn-color-dark: darken($warn-color, 10%);
 .container {
   justify-content: space-around;
 
@@ -20,6 +25,11 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: transform 0.3s, box-shadow 0.3s; // Add transition for smooth effect
+      &:hover {
+        transform: scale(1.02); // Slightly increase the size of the card
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Add shadow effect
+      }
       &.complete {
         background-color: var(--success-color);
       }
@@ -35,6 +45,22 @@
         .card-actions {
           display: flex;
           gap: var(--layout-gap-size);
+
+          .action-button {
+            transition: background-color 0.3s, transform 0.3s;
+
+            &:hover {
+              transform: scale(1.1); // Slightly increase the size of the button
+            }
+
+            &.done-button:hover {
+              background-color:  $primary-color-dark;
+            }
+
+            &.delete-button:hover {
+              background-color:  $warn-color-dark; 
+            }
+          }
         }
       }
 
