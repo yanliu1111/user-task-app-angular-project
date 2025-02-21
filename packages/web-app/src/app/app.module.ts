@@ -25,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { SearchComponent } from './tasks/search/search.component';
 import { StorageService } from './storage/storage.service';
+import { TasksService } from './tasks/tasks.service';
 
 const routes: Route[] = [
   {
@@ -79,6 +80,7 @@ const routes: Route[] = [
     AddComponent,
     RouterModule.forRoot(routes),
   ],
+  providers: [TasksService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

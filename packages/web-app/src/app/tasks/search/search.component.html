@@ -5,4 +5,12 @@
       <input matInput type="text" formControlName="search" />
     </mat-form-field>
   </form>
+  <div *ngIf="tasks.length === 0">
+    No search results found.
+  </div>
+  <!-- <div *ngIf="tasks.length > 0">
+    <ul>
+      <li *ngFor="let task of tasks">{{ task.title }}</li>
+    </ul>
+  </div> -->
 </div>

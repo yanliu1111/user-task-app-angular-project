@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { TasksService } from '../tasks.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+
+import { Component } from '@angular/core';
+import { TasksService } from '../tasks.service';
 
 @Component({
     selector: 'take-home-search-component',
@@ -20,5 +21,8 @@ export class SearchComponent {
       .subscribe((searchValue) => {
         this.taskService.searchTask(searchValue);
       });
+  }
+  get tasks() {
+    return this.taskService.tasks;
   }
 }
