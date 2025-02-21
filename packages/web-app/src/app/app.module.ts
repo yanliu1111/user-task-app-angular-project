@@ -1,28 +1,29 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Route, RouterModule } from '@angular/router';
+
+import { AddComponent } from './tasks/add/add.component';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { FiltersComponent } from './tasks/filters/filters.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListComponent } from './tasks/list/list.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatOptionModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { Route, RouterModule } from '@angular/router';
-import { AddComponent } from './tasks/add/add.component';
-import { FiltersComponent } from './tasks/filters/filters.component';
+import { NgModule } from '@angular/core';
 import { SearchComponent } from './tasks/search/search.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatChipsModule } from '@angular/material/chips';
-import { CommonModule } from '@angular/common';
 import { StorageService } from './storage/storage.service';
 
 const routes: Route[] = [
@@ -52,7 +53,6 @@ const routes: Route[] = [
     AppComponent,
     ListComponent,
     FiltersComponent,
-    AddComponent,
     SearchComponent,
   ],
   imports: [
@@ -76,7 +76,8 @@ const routes: Route[] = [
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
+    AddComponent,
+    RouterModule.forRoot(routes),
   ],
   bootstrap: [AppComponent],
 })
