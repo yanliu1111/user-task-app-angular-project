@@ -29,27 +29,26 @@ export class ChartComponent implements OnInit {
     this.loadChartData();
   }
 
-  loadChartData(): void {
-    const tasks = this.tasksService.tasks.filter(task => !task.isArchived);
-    console.log('tasks',tasks)
-    // Define priority counts with explicit typing
+  async loadChartData(): Promise<void> {
+    const tasks = await this.tasksService.getUnfilteredTasks(); // Get all non-archived tasks
+    console.log("tasks",tasks)
     const priorityCounts: Record<'HIGH' | 'MEDIUM' | 'LOW', number> = {
       HIGH: 0,
       MEDIUM: 0,
       LOW: 0
     };
-   
+  
     tasks.forEach(task => {
       if (task.priority in priorityCounts) {
         priorityCounts[task.priority as 'HIGH' | 'MEDIUM' | 'LOW']++;
       }
     });
-
+  
     this.taskData = Object.entries(priorityCounts).map(([priority, value]) => ({
       name: priority,
       value: value
-    })); 
-    console.log('this.taskData',this.taskData)
+    }));
+    console.log("this.taskData",this.taskData)
   }
 }
 

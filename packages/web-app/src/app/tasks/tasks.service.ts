@@ -29,7 +29,10 @@ export class TasksService {
     this.allTasks = allFetchedTasks.filter((task) => !task.isArchived);
     this.applyFilters();
   }
-
+  async getUnfilteredTasks(): Promise<Task[]> {
+    const allFetchedTasks = await this.storageService.getTasks();
+    return allFetchedTasks.filter(task => !task.isArchived); // Exclude archived tasks
+  }
   private applyFilters(): void {
     let filteredTasks = [...this.allTasks];
 
