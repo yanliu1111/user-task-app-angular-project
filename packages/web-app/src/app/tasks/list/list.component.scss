@@ -1,12 +1,20 @@
 $primary-color: #3f51b5; 
 $warn-color: #f44336;
 $accent-color: #ff4081;
+$custom-color: #44d2eb;
 
 $primary-color-dark: darken($primary-color, 10%);
 $warn-color-dark: darken($warn-color, 10%);
 $accent-color-dark: darken($accent-color, 10%);
+$custom-color-dark: darken($custom-color, 10%);
+
 .container {
   justify-content: space-around;
+
+  .custom-button {
+    background-color: $custom-color;
+    color: white; 
+  }
 
   .action-button-row {
     display: flex;
@@ -17,6 +25,10 @@ $accent-color-dark: darken($accent-color, 10%);
   
       &.addTask-button:hover {
         background-color: $accent-color-dark;
+        color: black;
+      }
+      &.chart-button:hover {
+        background-color: $custom-color-dark;
         color: black;
       }
     }

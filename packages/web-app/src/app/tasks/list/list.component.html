@@ -7,6 +7,9 @@
     <button data-testid="add-task" mat-flat-button class="action-button addTask-button" color="accent" (click)="onAddTask()">
       Add Task
     </button>
+     <button data-testid="view-charts" mat-flat-button class="action-button chart-button custom-button" (click)="onViewCharts()">
+      View Charts
+    </button>
   </div>
   <div class="tasks">
     <ng-container *ngFor="let item of tasksService.tasks">

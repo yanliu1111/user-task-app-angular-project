@@ -43,6 +43,11 @@ export class ListComponent {
     // TODO: navigate to add task
     this.router.navigate(['/add']);
   }
+  
+  onViewCharts(): void {
+    this.router.navigateByUrl('/charts');
+  }
+
 
   private getTaskList(): void {
     this.tasksService
