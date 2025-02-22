@@ -23,8 +23,8 @@ export class TasksService {
 
   async getTasksFromStorage(): Promise<void> {
     const allFetchedTasks = await this.storageService.getTasks();
-    this.allTasks = allFetchedTasks.filter((task) => !task.isArchived); // Exclude archived files once
-    this.tasks = [...this.allTasks]; // Copy all non-archived tasks for display
+    this.allTasks = allFetchedTasks.filter((task) => !task.isArchived); // Exclude archived tasks
+    this.tasks = [...this.allTasks]; // Copy the full task list for display
   }
 
   filterTask(key: keyof Task): void {
