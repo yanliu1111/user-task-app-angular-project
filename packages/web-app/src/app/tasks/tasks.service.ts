@@ -6,6 +6,7 @@ import { Task } from '@take-home/shared';
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
+  private allTasks: Task[] = []; // Store all tasks
   tasks: Task[] = [];
 
   constructor(
@@ -21,8 +22,9 @@ export class TasksService {
   }
 
   async getTasksFromStorage(): Promise<void> {
-    this.tasks = await this.storageService.getTasks();
-    this.filterTask('isArchived');
+    const allFetchedTasks = await this.storageService.getTasks();
+    this.allTasks = allFetchedTasks.filter((task) => !task.isArchived); // Exclude archived files once
+    this.tasks = [...this.allTasks]; // Copy all non-archived tasks for display
   }
 
   filterTask(key: keyof Task): void {
@@ -48,12 +50,8 @@ export class TasksService {
   }
 
   searchTask(search: string): void {
-    if (search) {
-      this.tasks = this.tasks.filter((task) =>
-        task.title.toLowerCase().includes(search.toLowerCase())
-      );
-    } else {
-      this.getTasksFromStorage();
-    }
+    this.tasks = this.allTasks.filter((task) =>
+      task.title.toLowerCase().includes(search.toLowerCase())
+    );
   }
 }
