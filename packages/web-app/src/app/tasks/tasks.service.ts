@@ -18,10 +18,12 @@ export class TasksService {
   ) {
     this.getTasksFromStorage();
   }
+
   getTasksFromApi(): Observable<Task[]> {
     const endpointUrl = '/api/tasks';
     return this.http.get<Task[]>(endpointUrl);
   }
+  
   async getTasksFromStorage(): Promise<void> {
     const allFetchedTasks = await this.storageService.getTasks();
     this.allTasks = allFetchedTasks.filter((task) => !task.isArchived);

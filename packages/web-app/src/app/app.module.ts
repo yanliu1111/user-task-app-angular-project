@@ -24,6 +24,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SearchComponent } from './tasks/search/search.component';
 import { StorageService } from './storage/storage.service';
 import { TasksService } from './tasks/tasks.service';
@@ -85,6 +86,7 @@ const routes: Route[] = [
     FormsModule,
     ReactiveFormsModule,
     AddComponent,
+    NgxChartsModule,
     RouterModule.forRoot(routes),
   ],
   providers: [TasksService],
