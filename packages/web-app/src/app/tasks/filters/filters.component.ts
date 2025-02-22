@@ -16,7 +16,7 @@ export class FiltersComponent {
     if (event.selected) {
       this.tasksService.filterTask(field);
     } else {
-      this.tasksService.getTasksFromStorage();
+      this.tasksService.clearFilters();
     }
   }
 }
