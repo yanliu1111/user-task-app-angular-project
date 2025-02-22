@@ -33,6 +33,7 @@
         data-testid="add-task"
         mat-flat-button
         color="primary"
+        class="action-button add-button"
         [disabled]="addTaskForm.invalid"
       >
         Add
@@ -42,6 +43,7 @@
         data-testid="cancel"
         mat-flat-button
         color="accent"
+        class="action-button cancel-button"
         (click)="onCancel()"
       >
         Cancel

@@ -1,3 +1,8 @@
+$primary-color: #3f51b5; 
+$accent-color: #ff4081;
+
+$primary-color-dark: darken($primary-color, 10%);
+$accent-color-dark: darken($accent-color, 10%);
 .container {
   justify-content: space-around;
 
@@ -12,6 +17,19 @@
       display: flex;
       justify-content: center;
       gap: var(--layout-gap-size);
+    }
+  }
+  .action-button {
+    transition: background-color 0.3s, transform 0.3s, color 0.3s;
+
+    &.add-button:hover {
+      background-color:  $primary-color-dark;
+      color: black;;
+    }
+
+    &.cancel-button:hover {
+      background-color:  $accent-color-dark;
+      color: black;;
     }
   }
 }
