@@ -16,6 +16,21 @@
       <mat-label>Description</mat-label>
       <textarea rows="4" matInput formControlName="description"> </textarea>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Scheduled Date</mat-label>
+      <input 
+        matInput 
+        [matDatepicker]="picker" 
+        formControlName="scheduledDate" 
+        [min]="minDate" 
+        [max]="maxDate"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="addTaskForm.get('scheduledDate')!.invalid && addTaskForm.get('scheduledDate')!.touched">
+        Scheduled date must be within the next 7 days.
+      </mat-error>
+    </mat-form-field>  
     <mat-form-field data-testid="priority-form-field" floatLabel="always">
       <mat-label>Priority</mat-label>
       <mat-select

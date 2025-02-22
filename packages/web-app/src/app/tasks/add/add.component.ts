@@ -9,8 +9,10 @@ import { Task, TaskPriority } from '@take-home/shared';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
@@ -30,6 +32,8 @@ import { faker } from '@faker-js/faker';
     MatSelectModule,
     MatButtonModule,
     MatOptionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class AddComponent {
@@ -44,9 +48,13 @@ export class AddComponent {
         validators: Validators.required,
       },
     ),
+    scheduledDate: new FormControl(new Date(), {
+      validators: [Validators.required],
+    }),
   });
   protected priorities = Object.values(TaskPriority);
-
+  protected minDate: Date = new Date(); // Today
+  protected maxDate: Date = new Date(new Date().setDate(new Date().getDate() + 7)); // Next 7 days
   constructor(private storageService: StorageService, private router: Router) {}
 
   async onSubmit() {
@@ -57,7 +65,7 @@ export class AddComponent {
         isArchived: false,
         // + 1 day
         // scheduledDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString(),
-        scheduledDate: Date.now()
+        scheduledDate: this.addTaskForm.get('scheduledDate')!.value,
       };
 
       await this.storageService.addTaskItem(newTask);
