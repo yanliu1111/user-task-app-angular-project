@@ -84,7 +84,6 @@ const routes: Route[] = [
     MatDatepickerModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule,
     AddComponent,
     NgxChartsModule,
     RouterModule.forRoot(routes),

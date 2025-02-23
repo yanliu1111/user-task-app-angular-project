@@ -15,7 +15,7 @@ $custom-color-dark: darken($custom-color, 10%);
     background-color: $custom-color;
     color: white; 
   }
-
+    
   .action-button-row {
     display: flex;
     justify-content: flex-start;
@@ -40,6 +40,16 @@ $custom-color-dark: darken($custom-color, 10%);
     margin: 5px;
     width: min(calc(100vw - var(--layout-padding)), var(--layout-width-max));
     gap: var(--layout-gap-size);
+    
+    .task-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 8px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      min-height: 200px; /* Ensures consistent height */
+    }
 
     mat-card {
       padding: var(--layout-padding);
@@ -57,6 +67,7 @@ $custom-color-dark: darken($custom-color, 10%);
       }
       .high-priority {
         color: var(--error-color);
+        margin-right: 30px;
       }
       .card-header {
         display: flex;
@@ -87,9 +98,33 @@ $custom-color-dark: darken($custom-color, 10%);
           }
         }
       }
-
-      mat-card-content {
+      .task-description {
+        border: 2px solid #2196F3; 
+        background-color: white;
+        padding: 10px;
+        flex-grow: 1;
+        min-height: 80px;
+        display: flex;
+        align-items: flex-start;
         overflow-y: auto;
+        max-height: 200px;
+      }
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        padding-top: 10px;
+      }
+      
+      .high-priority {
+        color: red;
+        font-weight: bold;
+      }
+      
+      .due-date {
+        font-size: 14px;
+        color: #333;
       }
     }
   }

@@ -63,7 +63,9 @@ export class TasksService {
         task.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
-
+    filteredTasks.sort(
+      (a, b) => new Date(a.scheduledDate).getTime() - new Date(b.scheduledDate).getTime()
+    );
     this.tasks = filteredTasks;
   }
 

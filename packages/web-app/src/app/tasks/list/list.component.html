@@ -17,6 +17,7 @@
         <div class="card-header">
           <mat-card-title>{{ item.title }}</mat-card-title>
           <div class="card-actions" *ngIf="item.uuid !== '1' && item.uuid !== '2'">
+            
             <button
               *ngIf="!item.completed"
               data-testid="complete-task"
@@ -38,16 +39,13 @@
             </button>
           </div>
         </div>
-        <mat-card-header>{{
-          item.scheduledDate | date : 'short'
-        }}</mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="task-description">
           {{ item.description }}
         </mat-card-content>
-        <mat-card-footer *ngIf="item.priority === 'HIGH'">
-          <span class="high-priority">{{ item.priority }}</span>
-        </mat-card-footer>
-        
+        <div class="card-footer">
+          <span class="due-date"><strong>Due Date:</strong> {{ item.scheduledDate | date : 'short' }}</span>
+          <span *ngIf="item.priority === 'HIGH'" class="high-priority">{{ item.priority }}</span>
+        </div>  
       </mat-card>
     </ng-container>
   </div>
