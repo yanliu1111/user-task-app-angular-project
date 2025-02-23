@@ -64,6 +64,7 @@
     "@nestjs/platform-express": "^10.0.2",
     "@swimlane/ngx-charts": "^22.0.0-alpha.0",
     "axios": "1.7.9",
+    "fuse.js": "^7.1.0",
     "idb": "^7.1.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.8.0",
