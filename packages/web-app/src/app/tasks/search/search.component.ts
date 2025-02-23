@@ -11,17 +11,20 @@ import { TasksService } from '../tasks.service';
     standalone: false
 })
 export class SearchComponent {
-  protected searchForm: FormGroup = new FormGroup({
-    search: new FormControl(null),
-  });
+  searchForm: FormGroup;
 
   constructor(private taskService: TasksService) {
+    this.searchForm = new FormGroup({
+      search: new FormControl(this.taskService.searchQuery), 
+    });
+
     this.searchForm.controls['search'].valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((searchValue) => {
         this.taskService.searchTask(searchValue);
       });
   }
+
   get tasks() {
     return this.taskService.tasks;
   }

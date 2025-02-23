@@ -9,7 +9,7 @@ export class TasksService {
   private allTasks: Task[] = []; // Store all tasks
   tasks: Task[] = [];
   private activeFilter: keyof Task | null = null;
-  private searchQuery = ''; 
+  public searchQuery = ''; 
 
   
   constructor(
