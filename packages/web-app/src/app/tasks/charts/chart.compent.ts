@@ -11,6 +11,7 @@ import { TasksService } from '../tasks.service';
 })
 export class ChartComponent implements OnInit {
   taskData: any[] = [];
+  taskCompletionData: any[] = [];
   view: [number, number] = [700, 400]; // Chart size
 
   // Chart options
@@ -22,16 +23,22 @@ export class ChartComponent implements OnInit {
     group: ScaleType.Ordinal,
     domain: ['#f44336', '#ff9800', '#4caf50'] // Red, Orange, Green
   };
-
+  pieColorScheme: Color = {
+    name: 'completionScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#4caf50', '#f44336'] // Green for Completed, Red for Incomplete
+  };
   constructor(private tasksService: TasksService) {}
 
   ngOnInit(): void {
     this.loadChartData();
+    this.loadCompletionChartData();
   }
 
   async loadChartData(): Promise<void> {
     const tasks = await this.tasksService.getUnfilteredTasks(); // Get all non-archived tasks
-    console.log("tasks",tasks)
+    //console.log("tasks",tasks)
     const priorityCounts: Record<'HIGH' | 'MEDIUM' | 'LOW', number> = {
       HIGH: 0,
       MEDIUM: 0,
@@ -48,7 +55,20 @@ export class ChartComponent implements OnInit {
       name: priority,
       value: value
     }));
-    console.log("this.taskData",this.taskData)
+    //console.log("this.taskData",this.taskData)
+  }
+
+  async loadCompletionChartData(): Promise<void> {
+    const tasks = await this.tasksService.getUnfilteredTasks();
+  
+    const completedCount = tasks.filter(task => task.completed).length;
+    const incompleteCount = tasks.length - completedCount;
+    const totalTasks = tasks.length;
+  
+    this.taskCompletionData = [
+      { name: `Completed (${((completedCount / totalTasks) * 100).toFixed(1)}%)`, value: completedCount },
+      { name: `Incomplete (${((incompleteCount / totalTasks) * 100).toFixed(1)}%)`, value: incompleteCount }
+    ];
   }
 }
 

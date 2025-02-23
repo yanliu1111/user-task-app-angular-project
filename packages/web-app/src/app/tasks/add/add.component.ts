@@ -56,7 +56,13 @@ export class AddComponent {
   protected minDate: Date = new Date(); // Today
   protected maxDate: Date = new Date(new Date().setDate(new Date().getDate() + 7)); // Next 7 days
   constructor(private storageService: StorageService, private router: Router) {}
+  get getMinDate(): Date {
+    return this.minDate;
+  }
 
+  get getMaxDate(): Date {
+    return this.maxDate;
+  }
   async onSubmit() {
     if (this.addTaskForm.valid) {
       const newTask: Task = {
