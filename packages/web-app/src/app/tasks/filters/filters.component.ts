@@ -10,12 +10,17 @@ import { TasksService } from '../tasks.service';
     standalone: false
 })
 export class FiltersComponent {
-  constructor(protected tasksService: TasksService) {}
+  selectedFilter: keyof Task | null = null;
+  constructor(protected tasksService: TasksService) {
+    this.selectedFilter = this.tasksService.getActiveFilter(); // debug: Restore selected filter
+  }
 
   filterTask(field: keyof Task, event: MatChipSelectionChange) {
     if (event.selected) {
+      this.selectedFilter = field;
       this.tasksService.filterTask(field);
     } else {
+      this.selectedFilter = null;
       this.tasksService.clearFilters();
     }
   }

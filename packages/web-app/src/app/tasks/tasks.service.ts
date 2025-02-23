@@ -72,6 +72,10 @@ export class TasksService {
     this.applyFilters();
   }
 
+  getActiveFilter(): keyof Task | null {
+    return this.activeFilter; // debug Provide filter state for UI
+  }
+
   searchTask(search: string): void {
     this.searchQuery = search;
     this.applyFilters();
