@@ -1,3 +1,4 @@
+import Fuse from 'fuse.js';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,7 +11,7 @@ export class TasksService {
   tasks: Task[] = [];
   private activeFilter: keyof Task | null = null;
   public searchQuery = ''; 
-
+  private fuse: Fuse<Task> | null = null;
   
   constructor(
     private http: HttpClient,
@@ -23,18 +24,27 @@ export class TasksService {
     const endpointUrl = '/api/tasks';
     return this.http.get<Task[]>(endpointUrl);
   }
-  
+  // add fuse.js in
   async getTasksFromStorage(): Promise<void> {
     const allFetchedTasks = await this.storageService.getTasks();
     this.allTasks = allFetchedTasks.filter((task) => !task.isArchived);
+    this.fuse = new Fuse(this.allTasks,{
+      keys:['title'],
+      threshold: 0.3,
+    })
     this.applyFilters();
   }
   async getUnfilteredTasks(): Promise<Task[]> {
     const allFetchedTasks = await this.storageService.getTasks();
     return allFetchedTasks.filter(task => !task.isArchived); // Exclude archived tasks
   }
+  // compile the logic filter and search
   private applyFilters(): void {
     let filteredTasks = [...this.allTasks];
+
+    if (this.searchQuery && this.fuse) {
+      filteredTasks = this.fuse.search(this.searchQuery).map(result => result.item);
+    }
 
     if (this.activeFilter) {
       switch (this.activeFilter) {
@@ -57,12 +67,12 @@ export class TasksService {
           break;
       }
     }
-
-    if (this.searchQuery) {
-      filteredTasks = filteredTasks.filter((task) =>
-        task.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    }
+    
+    // if (this.searchQuery) {
+    //   filteredTasks = filteredTasks.filter((task) =>
+    //     task.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+    //   );
+    // }
     filteredTasks.sort(
       (a, b) => new Date(a.scheduledDate).getTime() - new Date(b.scheduledDate).getTime()
     );
