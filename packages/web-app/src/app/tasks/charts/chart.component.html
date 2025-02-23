@@ -12,4 +12,14 @@
   [showDataLabel]="showLabels"
 >
 </ngx-charts-bar-vertical>
+<h2>Task Completion Status</h2>
+  <ngx-charts-pie-chart
+    [view]="view"
+    [results]="taskCompletionData"
+    [scheme]="pieColorScheme"
+    [legend]="showLegend"
+    [labels]="showLabels"
+    [doughnut]="false"
+  >
+  </ngx-charts-pie-chart>
 </div>
