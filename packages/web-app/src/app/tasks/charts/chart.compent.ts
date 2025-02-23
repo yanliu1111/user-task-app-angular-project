@@ -1,6 +1,7 @@
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { Component, OnInit } from '@angular/core';
 
+import { Router } from '@angular/router';
 import { TasksService } from '../tasks.service';
 
 @Component({
@@ -29,7 +30,7 @@ export class ChartComponent implements OnInit {
     group: ScaleType.Ordinal,
     domain: ['#4caf50', '#f44336'] // Green for Completed, Red for Incomplete
   };
-  constructor(private tasksService: TasksService) {}
+  constructor(private tasksService: TasksService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadChartData();
@@ -69,6 +70,9 @@ export class ChartComponent implements OnInit {
       { name: `Completed (${((completedCount / totalTasks) * 100).toFixed(1)}%)`, value: completedCount },
       { name: `Incomplete (${((incompleteCount / totalTasks) * 100).toFixed(1)}%)`, value: incompleteCount }
     ];
+  }
+  onBack(): void {
+    this.router.navigate(['/']);
   }
 }
 

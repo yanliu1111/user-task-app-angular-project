@@ -1,5 +1,16 @@
 <div class="chart-container">
-  <h1>Task Priority Distribution</h1>
+  <h1>View Progress📈</h1>
+  <button
+        type="button"
+        data-testid="back"
+        mat-flat-button
+        color="accent"
+        class="action-button back-button"
+        (click)="onBack()"
+      >
+        Back
+  </button>
+  <h2>Task Priority Distribution</h2>
   <ngx-charts-bar-vertical
   [view]="view"
   [results]="taskData"
