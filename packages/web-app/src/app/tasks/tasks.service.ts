@@ -28,10 +28,10 @@ export class TasksService {
   async getTasksFromStorage(): Promise<void> {
     const allFetchedTasks = await this.storageService.getTasks();
     this.allTasks = allFetchedTasks.filter((task) => !task.isArchived);
-    this.fuse = new Fuse(this.allTasks,{
-      keys:['title'],
+    this.fuse = new Fuse(this.allTasks, {
+      keys: ['title'],
       threshold: 0.3,
-    })
+    });
     this.applyFilters();
   }
   async getUnfilteredTasks(): Promise<Task[]> {
@@ -39,7 +39,7 @@ export class TasksService {
     return allFetchedTasks.filter(task => !task.isArchived); // Exclude archived tasks
   }
   // compile the logic filter and search
-  private applyFilters(): void {
+  public applyFilters(): void {
     let filteredTasks = [...this.allTasks];
 
     if (this.searchQuery && this.fuse) {
@@ -96,5 +96,8 @@ export class TasksService {
   clearFilters(): void {
     this.activeFilter = null;
     this.applyFilters();
+  }
+  getAllTasks(): Task[] {
+    return this.allTasks;
   }
 }
