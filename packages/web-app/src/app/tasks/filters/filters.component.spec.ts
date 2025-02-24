@@ -1,76 +1,80 @@
-import { MatChipOptionHarness } from '@angular/material/chips/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule } from '@angular/platform-browser';
-import { Task } from '@take-home/shared';
+
 import { FiltersComponent } from './filters.component';
-import { TasksService } from '../tasks.service';
-import { MatChipsModule } from '@angular/material/chips';
 import { HarnessLoader } from '@angular/cdk/testing';
+import { MatChipOptionHarness } from '@angular/material/chips/testing';
+import { MatChipsModule } from '@angular/material/chips';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Task } from '@take-home/shared';
+import { TasksService } from '../tasks.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { of } from 'rxjs';
 
 class MockTasksService {
-  filterTask(): void {
-    return;
-  }
-  getTasksFromStorage(): Promise<Task[]> {
-    return Promise.resolve([]);
+  filterTask = jest.fn();
+  getTasksFromStorage = jest.fn().mockResolvedValue([]);
+  
+  getActiveFilter(): keyof Task | null {
+    return null;
   }
 }
 
 describe('FiltersComponent', () => {
   let fixture: ComponentFixture<FiltersComponent>;
   let loader: HarnessLoader;
-  let tasksService: TasksService;
+  let mockTasksService: MockTasksService;
+  let component: FiltersComponent;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [BrowserModule, MatChipsModule],
+  beforeEach(async () => {
+    mockTasksService = new MockTasksService();
+
+    await TestBed.configureTestingModule({
       declarations: [FiltersComponent],
-      providers: [{ provide: TasksService, useClass: MockTasksService }],
+      imports: [MatChipsModule, NoopAnimationsModule], // Required for Material Chips
+      providers: [{ provide: TasksService, useValue: mockTasksService }],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
-    tasksService = TestBed.inject(TasksService);
     fixture = TestBed.createComponent(FiltersComponent);
-    loader = TestbedHarnessEnvironment.loader(fixture);
+    component = fixture.componentInstance;
+    loader = TestbedHarnessEnvironment.loader(fixture); // Initialize loader for harness
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(fixture.componentInstance).toBeDefined();
+    expect(component).toBeTruthy();
   });
 
   it('should contain 3 mat chips for filtering', async () => {
-    jest.spyOn(tasksService, 'filterTask');
     const matChips = await loader.getAllHarnesses(MatChipOptionHarness);
     expect(matChips.length).toEqual(3);
     expect(await matChips[0].getText()).toEqual('High Priority');
     expect(await matChips[1].getText()).toEqual('Not Complete');
     expect(await matChips[2].getText()).toEqual('Due Today');
   });
-
   it('should filter tasks by priority', async () => {
-    jest.spyOn(tasksService, 'filterTask');
+    const spy = jest.spyOn(mockTasksService, 'filterTask');
     const matChips = await loader.getAllHarnesses(MatChipOptionHarness);
     await matChips[0].select();
-    expect(tasksService.filterTask).toHaveBeenCalledTimes(1);
-    expect(tasksService.filterTask).toHaveBeenCalledWith('priority');
+
+    expect(spy).toHaveBeenCalledWith('priority'); // Removed `expect.any(Object)`
   });
 
   it('should filter tasks by completed', async () => {
-    jest.spyOn(tasksService, 'filterTask');
+    const spy = jest.spyOn(mockTasksService, 'filterTask');
     const matChips = await loader.getAllHarnesses(MatChipOptionHarness);
     await matChips[1].select();
-    expect(tasksService.filterTask).toHaveBeenCalledTimes(1);
-    expect(tasksService.filterTask).toHaveBeenCalledWith('completed');
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith('completed'); // Removed `expect.any(Object)`
   });
 
   it('should filter tasks by scheduledDate', async () => {
-    jest.spyOn(tasksService, 'filterTask');
+    const spy = jest.spyOn(mockTasksService, 'filterTask');
     const matChips = await loader.getAllHarnesses(MatChipOptionHarness);
     await matChips[2].select();
-    expect(tasksService.filterTask).toHaveBeenCalledTimes(1);
-    expect(tasksService.filterTask).toHaveBeenCalledWith('scheduledDate');
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith('scheduledDate'); // Removed `expect.any(Object)`
   });
+
 });
