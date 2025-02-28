@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ChartComponent } from './chart.compent';
+import { ChartComponent } from './chart.component';
 import { Router } from '@angular/router';
 import { TasksService } from '../tasks.service';
 import { of } from 'rxjs';

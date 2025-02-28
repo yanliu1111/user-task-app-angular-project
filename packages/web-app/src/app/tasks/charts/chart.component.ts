@@ -4,6 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TasksService } from '../tasks.service';
 
+interface TaskData {
+  name: string;
+  value: number;
+}
 @Component({
   selector: 'take-home-chart-component',
   templateUrl: './chart.component.html',
@@ -11,8 +15,8 @@ import { TasksService } from '../tasks.service';
   standalone: false
 })
 export class ChartComponent implements OnInit {
-  taskData: any[] = [];
-  taskCompletionData: any[] = [];
+  taskData: TaskData[] = [];
+  taskCompletionData: TaskData[] = [];
   view: [number, number] = [700, 400]; // Chart size
 
   // Chart options

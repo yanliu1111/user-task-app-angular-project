@@ -5,7 +5,7 @@ import { AddComponent } from './tasks/add/add.component';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { ChartComponent } from './tasks/charts/chart.compent';
+import { ChartComponent } from './tasks/charts/chart.component';
 import { CommonModule } from '@angular/common';
 import { FiltersComponent } from './tasks/filters/filters.component';
 import { HttpClientModule } from '@angular/common/http';
