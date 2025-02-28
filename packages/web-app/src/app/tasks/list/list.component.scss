@@ -75,6 +75,14 @@ $custom-color-dark: darken($custom-color, 10%);
         align-items: center;
         margin-bottom: var(--layout-gap-size);
 
+        mat-card-title {
+          flex-grow: 1;
+          max-width: 80%; // Prevents the title from taking up too much space
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        
         .card-actions {
           display: flex;
           gap: var(--layout-gap-size);
