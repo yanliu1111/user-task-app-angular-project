@@ -109,19 +109,22 @@ graph TD;
   A2[Web-app] --> B1[src]
   B1 --> D1[app]
   D1 --> E2[app.component.ts]
-  D1 --> F2[storage]
-  F2 --> G2[storage.service.ts]
+  D1 --> F2[app.module.ts]
+  D1 --> G2[storage]
+  G2 --> H3[Storage.service.ts]
   D1 --> H2[tasks]
-  H2 --> I2[add]
+  H2 --> I2[add]:::red
   I2 --> J2[add.component.ts]
-  H2 --> K2[charts]
+  H2 --> K2[charts]:::red
   K2 --> L2[chart.component.ts]
-  H2 --> M2[filters]
+  H2 --> M2[filters]:::red
   M2 --> N2[filters.component.ts]
-  H2 --> O2[list]
+  H2 --> O2[list]:::red
   O2 --> P2[list.component.ts]
-  H2 --> Q2[search]
+  H2 --> Q2[search]:::red
   Q2 --> R2[search.component.ts]
   H2 --> S2[tasks.server.ts]
+
+  classDef red fill:#ff6666,stroke:#cc0000,stroke-width:2px;
 
 ```
