@@ -91,3 +91,38 @@ Add takehome@scription.ai as a collaborator to your repository.
 
 Feel free to reach out if you have any questions during the assignment period.
 Good luck, and we look forward to reviewing your submission!
+
+--- 
+## flowchart
+```mermaid
+graph TD;
+  A[node-app] --> B[src]
+  B --> C[app.module.ts]
+  B --> D[app]
+  D --> E[tasks]
+  E --> F[tasks.server.ts]
+  E --> G[tasks.controller.ts]
+  E --> H[tasks.store.ts]
+
+  A1[shared]
+
+  A2[Web-app] --> B1[src]
+  B1 --> C1[app.component.ts]
+  B1 --> D1[app]
+  D1 --> E1[app.component.ts]
+  D1 --> F1[storage]
+  F1 --> G1[Storage.service.ts]
+  D1 --> H1[tasks]
+  H1 --> I1[add]
+  I1 --> J1[add.component.ts]
+  H1 --> K1[charts]
+  K1 --> L1[chart.component.ts]
+  H1 --> M1[filters]
+  M1 --> N1[filters.component.ts]
+  H1 --> O1[list]
+  O1 --> P1[list.component.ts]
+  H1 --> Q1[search]
+  Q1 --> R1[search.component.ts]
+  H1 --> S1[tasks.server.ts]
+
+```
