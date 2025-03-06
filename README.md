@@ -112,7 +112,7 @@ graph TD;
   D1 --> F2[app.module.ts]
   D1 --> G2[storage]
   G2 --> H3[Storage.service.ts]
-  D1 --> H2[tasks]:::green
+  D1 --> H2[tasks]
   H2 --> I2[add]:::red
   I2 --> J2[add.component.ts]
   H2 --> K2[charts]:::red
@@ -123,7 +123,7 @@ graph TD;
   O2 --> P2[list.component.ts]
   H2 --> Q2[search]:::red
   Q2 --> R2[search.component.ts]
-  H2 --> S2[tasks.server.ts]
+  H2 --> S2[tasks.server.ts]:::green
 
   classDef red fill:#ff6666,stroke:#cc0000,stroke-width:2px;
   classDef green fill:#66ff66,stroke:#008000,stroke-width:2px;
