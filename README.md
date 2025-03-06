@@ -95,7 +95,7 @@ Good luck, and we look forward to reviewing your submission!
 --- 
 ## Flowchart of the application
 ```mermaid
-graph TD;
+graph LR;
   A[node-app] --> B[src]
   B --> D[app]
   D --> E1[app.module.ts]
@@ -130,4 +130,5 @@ graph TD;
   classDef boldText font-weight:bold,font-size:16px;
 
   class A,B,D,E1,F1,G,H,I,A1,A2,B1,D1,E2,F2,G2,H3,H2,I2,J2,K2,L2,M2,N2,O2,P2,Q2,R2,S2 boldText;
+
 ```
