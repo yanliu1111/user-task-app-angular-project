@@ -100,7 +100,7 @@ graph LR;
   B --> D[app]
   D --> E1[app.module.ts]
   D --> F1[tasks]
-  F1 --> G[tasks.server.ts]
+  F1 --> G[tasks.service.ts]
   F1 --> H[tasks.controller.ts]
   F1 --> I[tasks.store.ts]
 
@@ -123,7 +123,7 @@ graph LR;
   O2 --> P2[list.component.ts]
   H2 --> Q2[search]:::red
   Q2 --> R2[search.component.ts]
-  H2 --> S2[tasks.server.ts]:::green
+  H2 --> S2[tasks.service.ts]:::green
 
   classDef red fill:#ff6666,stroke:#cc0000,stroke-width:2px;
   classDef green fill:#66ff66,stroke:#008000,stroke-width:2px;
