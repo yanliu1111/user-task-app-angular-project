@@ -41,31 +41,31 @@ export class StorageService {
     });
   }
   //debug add promise
-  async getItem<T>(
-    storeName: string,
-    id: string | null,
-  ): Promise<Observable<T>> {
-    const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
-    return from(
-      dbPromise.then((db) => {
-        return db.get(storeName, id ? id : '');
-      }),
-    );
-  }
+  // async getItem<T>(
+  //   storeName: string,
+  //   id: string | null,
+  // ): Promise<Observable<T>> {
+  //   const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
+  //   return from(
+  //     dbPromise.then((db) => {
+  //       return db.get(storeName, id ? id : '');
+  //     }),
+  //   );
+  // }
 
-  async getItems<T>(storeName: string): Promise<T[]> {
-    const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
-    return dbPromise.then((db) => {
-      return db.getAll(storeName);
-    });
-  }
+  // async getItems<T>(storeName: string): Promise<T[]> {
+  //   const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
+  //   return dbPromise.then((db) => {
+  //     return db.getAll(storeName);
+  //   });
+  // }
 
-  async resetIndexedDB() {
-    const tasks = this.clearTasks();
-    await Promise.allSettled([tasks]).then(() => {
-      this.restoreIndexedDB();
-    });
-  }
+  // async resetIndexedDB() {
+  //   const tasks = this.clearTasks();
+  //   await Promise.allSettled([tasks]).then(() => {
+  //     this.restoreIndexedDB();
+  //   });
+  // }
 
   private async addTask(item: Task) {
     const dbPromise = openDB(`${this.dbName}`, this.dbVersion);
@@ -98,3 +98,4 @@ export class StorageService {
     });
   }
 }
+

@@ -40,6 +40,8 @@ export class TasksService {
   }
   // compile the logic filter and search
   public applyFilters(): void {
+    // eslint-disable-next-line no-debugger
+    //debugger;
     let filteredTasks = [...this.allTasks];
 
     if (this.searchQuery && this.fuse) {

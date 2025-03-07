@@ -94,9 +94,7 @@ export class AddComponent {
 function alphanumericLengthValidator(minLength: number): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) return null; // Allow empty input to be handled by 'required' validator
-
     const filteredLength = (control.value.match(/[a-zA-Z0-9]/g) || []).length; // Count only a-z, A-Z, 0-9
-
     return filteredLength >= minLength ? null : { alphanumericMinLength: { requiredLength: minLength, actualLength: filteredLength } };
   };
 }
