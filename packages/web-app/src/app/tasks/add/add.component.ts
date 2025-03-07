@@ -1,3 +1,4 @@
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import {
   FormControl,
   FormGroup,
@@ -39,7 +40,10 @@ import { faker } from '@faker-js/faker';
 export class AddComponent {
   protected addTaskForm: FormGroup = new FormGroup({
     title: new FormControl(null, {
-      validators: [Validators.required, Validators.minLength(10)],
+      validators: [
+        Validators.required,
+        alphanumericLengthValidator(10), 
+      ],
     }),
     description: new FormControl(null),
     priority: new FormControl(
@@ -82,4 +86,17 @@ export class AddComponent {
   onCancel(): void {
     this.router.navigate(['/']);
   }
+  get titleControl() {
+    return this.addTaskForm.get('title');
+  }
+}
+
+function alphanumericLengthValidator(minLength: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) return null; // Allow empty input to be handled by 'required' validator
+
+    const filteredLength = (control.value.match(/[a-zA-Z0-9]/g) || []).length; // Count only a-z, A-Z, 0-9
+
+    return filteredLength >= minLength ? null : { alphanumericMinLength: { requiredLength: minLength, actualLength: filteredLength } };
+  };
 }

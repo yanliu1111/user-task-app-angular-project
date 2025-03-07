@@ -4,12 +4,13 @@
     <mat-form-field>
       <mat-label>Title</mat-label>
       <input matInput type="text" formControlName="title" />
-      <mat-error
-        *ngIf="
-          addTaskForm.get('title')!.invalid && addTaskForm.get('title')!.touched
-        "
-      >
-        Title is required and must be at least 10 characters long.
+    
+      <mat-error *ngIf="titleControl!.hasError('required') && titleControl!.touched">
+        Title is required.
+      </mat-error>
+    
+      <mat-error *ngIf="titleControl!.hasError('alphanumericMinLength') && titleControl!.touched">
+        Title must contain at least {{ titleControl!.getError('alphanumericMinLength').requiredLength }} letters or numbers (currently {{ titleControl!.getError('alphanumericMinLength').actualLength }}).
       </mat-error>
     </mat-form-field>
     <mat-form-field>
