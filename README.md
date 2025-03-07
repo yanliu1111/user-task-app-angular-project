@@ -149,7 +149,7 @@ graph LR;
 - **Lifecycle hooks**: 
   - Tap into key moments in a component’s life:
     - **ngOnInit**: Initialize data.
-    - **ngOnSubmit**: Respond to changes.
+    - **ngSubmit**: Respond to changes.
 
 ✅ **RxJS** (Reactive Extensions for JavaScript)
 - **Library for reactive programming using observables**
