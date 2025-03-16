@@ -34,6 +34,7 @@ export class TasksService {
     });
     this.applyFilters();
   }
+  //result for chart
   async getUnfilteredTasks(): Promise<Task[]> {
     const allFetchedTasks = await this.storageService.getTasks();
     return allFetchedTasks.filter(task => !task.isArchived); // Exclude archived tasks

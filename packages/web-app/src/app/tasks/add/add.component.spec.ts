@@ -89,6 +89,8 @@ describe('AddComponent', () => {
   it('should prevent selecting a date after maxDate', async () => {
     const dateInput = await loader.getHarness(MatDatepickerInputHarness);
     const invalidDate = new Date();
+    expect(component['addTaskForm'].controls['scheduledDate'].valid).toBeTruthy();
+
     invalidDate.setDate(component.getMaxDate.getDate() + 1);
 
     await dateInput.setValue(invalidDate.toISOString());

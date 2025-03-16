@@ -55,9 +55,9 @@ export class ListComponent {
       .pipe(take(1))
       .subscribe(async (tasks) => {
         tasks.forEach(async (task) => {
-          await this.storageService.updateTaskItem(task);
+          await this.storageService.updateTaskItem(task); // Save task to storage
         });
-        await this.tasksService.getTasksFromStorage();
+        await this.tasksService.getTasksFromStorage(); // Refresh tasks
       });
   }
 }

@@ -21,7 +21,11 @@ export class StorageService {
   async addTaskItem(item: Task) {
     await this.addTask(item);
   }
-
+  // improvement
+  // async addTaskItem(item: Task) {
+  //   const db = await openDB(this.dbName, this.dbVersion);
+  //   await db.add(this.tasks, item, item.uuid);
+  // }
   async updateTaskItem(item: Task) {
     await this.updateTask(item);
   }
